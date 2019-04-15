@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     var window: UIWindow?
     let locationManager = CLLocationManager()
-    
+    var deviceOrientationHelper: DeviceOrientationHelper?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             if permissionGranted {
                 print("Granted!")
             } else {
-                print("Error: \(error)")
+                print("Error: \(String(describing: error))")
             }
         }
         application.registerForRemoteNotifications()
@@ -58,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
+
         self.saveContext()
     }
 
@@ -106,31 +107,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
     }
     
-    // MARK: - LocationManager methodss
+    // MARK: - LocationManager methods
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         if region is CLBeaconRegion {
-            let content = UNMutableNotificationContent()
-            content.title = "Location Finder"
-            content.body = "Did enter \(region)"
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-            let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            startOrientationDetection()
         }
     }
         
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         if region is CLBeaconRegion {
-            let content = UNMutableNotificationContent()
-            content.title = "Location Finder"
-            content.body = "Did exit \(region)"
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-            let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            startOrientationDetection()
         }
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        completionHandler()
+    // MARK: - Orientation Method
+    
+    func startOrientationDetection() {
+        deviceOrientationHelper = DeviceOrientationHelper()
+        var counter: Int = 0
+        deviceOrientationHelper?.startDeviceOrientationNotifier { (deviceOrientation) in
+            counter += 1
+            if deviceOrientation == .portrait || deviceOrientation == .portraitUpsideDown {
+                self.sendNotification("Orientation change", body: "it's now portrait with " + String(counter))
+            } else {
+                self.sendNotification("Orientation change", body: "it's now landscape with " + String(counter))
+            }
+        }
+    }
+    
+    // MARK: - Notification Method
+    
+    func sendNotification(_ title: String, body: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: body, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 }

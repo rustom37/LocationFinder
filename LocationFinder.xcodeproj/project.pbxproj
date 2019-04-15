@@ -14,6 +14,7 @@
 		AAA29C4122607EFF00BBCD36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAA29C4022607EFF00BBCD36 /* Assets.xcassets */; };
 		AAA29C4422607EFF00BBCD36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAA29C4222607EFF00BBCD36 /* LaunchScreen.storyboard */; };
 		AAA29C4C22607F1A00BBCD36 /* FindMyLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA29C4B22607F1A00BBCD36 /* FindMyLocation.swift */; };
+		AAB37C202264A43700690DF9 /* DeviceOrientationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB37C1F2264A43700690DF9 /* DeviceOrientationHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		AAA29C4322607EFF00BBCD36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AAA29C4522607EFF00BBCD36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAA29C4B22607F1A00BBCD36 /* FindMyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindMyLocation.swift; sourceTree = "<group>"; };
+		AAB37C1F2264A43700690DF9 /* DeviceOrientationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceOrientationHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				AAA29C4522607EFF00BBCD36 /* Info.plist */,
 				AAA29C3D22607EFE00BBCD36 /* LocationFinder.xcdatamodeld */,
 				AAA29C4B22607F1A00BBCD36 /* FindMyLocation.swift */,
+				AAB37C1F2264A43700690DF9 /* DeviceOrientationHelper.swift */,
 			);
 			path = LocationFinder;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			files = (
 				AAA29C3922607EFE00BBCD36 /* ViewController.swift in Sources */,
 				AAA29C3F22607EFE00BBCD36 /* LocationFinder.xcdatamodeld in Sources */,
+				AAB37C202264A43700690DF9 /* DeviceOrientationHelper.swift in Sources */,
 				AAA29C3722607EFE00BBCD36 /* AppDelegate.swift in Sources */,
 				AAA29C4C22607F1A00BBCD36 /* FindMyLocation.swift in Sources */,
 			);

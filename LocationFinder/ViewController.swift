@@ -11,12 +11,17 @@ import UIKit
 class ViewController: UIViewController {
     
     let locationFinder = FindMyLocation(name: "Estimote", uuid: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")! ,majorValue: 50075, minorValue: 56949)
+    
 
+    @IBOutlet weak var displayLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         locationFinder.requestAuthorization()
         locationFinder.startMonitoring()
+        
+        self.displayLabel.text = UserDefaults.standard.string(forKey: "steve")
     }
 }
 

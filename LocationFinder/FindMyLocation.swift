@@ -61,6 +61,15 @@ class FindMyLocation: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Did enter.")
+        UserDefaults.standard.set("0", forKey: "steve")
+        var steve = 0
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+            steve += 1
+            UserDefaults.standard.set(String(steve), forKey: "steve")
+            UserDefaults.standard.synchronize()
+            print(steve)
+        }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
