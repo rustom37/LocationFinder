@@ -106,6 +106,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
     }
     
+    // MARK: - LocationManager methodss
+    
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         if region is CLBeaconRegion {
             let content = UNMutableNotificationContent()
